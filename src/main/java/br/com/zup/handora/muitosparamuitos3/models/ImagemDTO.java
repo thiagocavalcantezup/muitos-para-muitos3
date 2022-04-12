@@ -34,6 +34,10 @@ public class ImagemDTO {
         this.dataHora = dataHora;
     }
 
+    public Imagem toModel() {
+        return new Imagem(titulo, descricao, url, dataHora);
+    }
+
     public String getTitulo() {
         return titulo;
     }
