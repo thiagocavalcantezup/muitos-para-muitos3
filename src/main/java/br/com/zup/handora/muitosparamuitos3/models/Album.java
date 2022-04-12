@@ -1,12 +1,17 @@
 package br.com.zup.handora.muitosparamuitos3.models;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +31,11 @@ public class Album {
     @Column(nullable = false)
     private LocalDateTime criadoEm = LocalDateTime.now();
 
+    @ManyToMany
+    @JoinTable(name = "album_imagem", joinColumns = @JoinColumn(name = "album_id"), inverseJoinColumns = @JoinColumn(name = "imagem_id"))
+    @Column(nullable = false)
+    private Set<Imagem> imagens = new HashSet<>();
+
     /**
      * @deprecated Construtor de uso exclusivo do Hibernate
      */
@@ -35,6 +45,11 @@ public class Album {
     public Album(String titulo, String descricao) {
         this.titulo = titulo;
         this.descricao = descricao;
+    }
+
+    public void adicionar(Imagem imagem) {
+        imagem.getAlbuns().add(this);
+        this.imagens.add(imagem);
     }
 
     public Long getId() {

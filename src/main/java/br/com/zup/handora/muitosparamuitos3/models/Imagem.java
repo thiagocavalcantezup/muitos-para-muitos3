@@ -1,12 +1,15 @@
 package br.com.zup.handora.muitosparamuitos3.models;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.PastOrPresent;
 
@@ -31,6 +34,10 @@ public class Imagem {
     @PastOrPresent
     private LocalDateTime dataHora;
 
+    @ManyToMany(mappedBy = "imagens")
+    @Column(nullable = false)
+    private Set<Album> albuns = new HashSet<>();
+
     /**
      * @deprecated Construtor de uso exclusivo do Hibernate
      */
@@ -47,6 +54,10 @@ public class Imagem {
 
     public Long getId() {
         return id;
+    }
+
+    public Set<Album> getAlbuns() {
+        return albuns;
     }
 
 }
