@@ -17,6 +17,10 @@ public class AlbumDTO {
         this.descricao = descricao;
     }
 
+    public Album toModel() {
+        return new Album(titulo, descricao);
+    }
+
     public String getTitulo() {
         return titulo;
     }

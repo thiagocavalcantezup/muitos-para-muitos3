@@ -1,5 +1,7 @@
 package br.com.zup.handora.muitosparamuitos3.models;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,9 @@ public class Album {
 
     @Column(nullable = false)
     private String descricao;
+
+    @Column(nullable = false)
+    private LocalDateTime criadoEm = LocalDateTime.now();
 
     /**
      * @deprecated Construtor de uso exclusivo do Hibernate
