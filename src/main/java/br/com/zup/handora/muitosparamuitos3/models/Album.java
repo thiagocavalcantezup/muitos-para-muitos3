@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Album {
     @Column(nullable = false)
     private LocalDateTime criadoEm = LocalDateTime.now();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "album_imagem", joinColumns = @JoinColumn(name = "album_id"), inverseJoinColumns = @JoinColumn(name = "imagem_id"))
     @Column(nullable = false)
     private Set<Imagem> imagens = new HashSet<>();
